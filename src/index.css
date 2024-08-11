@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .skill-box {
+    @apply p-4 shadow-lg w-fit h-fit m-auto text-center flex flex-col gap-1 text-sm bg-[#CACACA] hover:scale-105 transition-all cursor-pointer;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  svg {
+    width: 45px;
+    height: 45px;
+  }
+}
