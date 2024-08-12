@@ -19,7 +19,7 @@ const Grid = ({ black }) => {
   return (
     <div
       className={classNames(
-        `h-full absolute inset-0 grid grid-cols-4 *:border-l-[1px] ${
+        `h-full absolute inset-0 grid grid-cols-4 *:border-l-[1px] md:grid-cols-3 ${
           black
             ? "*:border-black *:border-opacity-30"
             : "*:border-white *:border-opacity-10"
@@ -27,7 +27,7 @@ const Grid = ({ black }) => {
       )}
     >
       <div className="box"></div>
-      <div className="box"></div>
+      <div className="box md:hidden"></div>
       <div className="box"></div>
       <div className="border-r-[1px] box"></div>
     </div>
