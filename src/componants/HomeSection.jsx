@@ -41,6 +41,18 @@ const HomeSection = () => {
         duration: 0.5,
       }
     )
+    gsap.fromTo(
+      "#btn",
+      {
+        opacity: 0,
+      },
+      {
+        delay: 0.15,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.inOut",
+      }
+    )
   }, [])
   return (
     <div
@@ -68,7 +80,10 @@ const HomeSection = () => {
         >
           a passionate web developer who loves to build web
         </p>
-        <button className="row-start-4 bg-gray-300 rounded-full border-2 border-black px-6 z-10 py-2 h-fit self-center m-auto text-black font-thin w-32">
+        <button
+          id="btn"
+          className="row-start-4 bg-gray-300 rounded-full border-2 border-black px-6 z-10 py-2 h-fit self-center m-auto text-black font-thin w-32"
+        >
           Projects
         </button>
       </div>

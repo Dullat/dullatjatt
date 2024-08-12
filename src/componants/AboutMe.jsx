@@ -6,7 +6,7 @@ const AboutMe = () => {
     <div className="relative ">
       {/* <Grid black={true}></Grid> */}
       <div className="my-20 grid grid-cols-2 lg:grid-cols-1">
-        <div className="pr-10 md:px-4 xsm:px-0">
+        <div className="pr-10 md:px-4 xsm:px-2">
           <div className="bg-[#444444] p-8 text-white md:text-center">
             <p className="text-3xl">About Me</p>
             <p className="font-light">
@@ -108,11 +108,6 @@ const AboutMe = () => {
                     fill="#323330"
                   />
                 </g>
-                <defs>
-                  <clipPath id="clip0_2047_13">
-                    <rect width="60" height="60" fill="white" />
-                  </clipPath>
-                </defs>
               </svg>
               <span>Js</span>
             </div>
@@ -265,11 +260,6 @@ const AboutMe = () => {
                     fill="#99425B"
                   />
                 </g>
-                <defs>
-                  <clipPath id="clip0_2047_780">
-                    <rect width="60" height="60" fill="white" />
-                  </clipPath>
-                </defs>
               </svg>
               <span>jest</span>
             </div>
@@ -3270,10 +3260,7 @@ const AboutMe = () => {
                     r="1"
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="translate(40.9043 52.0508) scale(14.197 7.09849)"
-                  >
-                    <stop stop-opacity="0.502" />
-                    <stop offset="1" stop-opacity="0" />
-                  </radialGradient>
+                  ></radialGradient>
                   <radialGradient
                     id="paint1_radial_2047_66"
                     cx="0"
@@ -3281,10 +3268,7 @@ const AboutMe = () => {
                     r="1"
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="translate(19.3227 51.9749) scale(14.5823 7.09849)"
-                  >
-                    <stop stop-opacity="0.502" />
-                    <stop offset="1" stop-opacity="0" />
-                  </radialGradient>
+                  ></radialGradient>
                   <linearGradient
                     id="paint2_linear_2047_66"
                     x1="25.421"
@@ -3556,11 +3540,11 @@ const AboutMe = () => {
             </div>
           </div>
         </div>
-        <div className="relative flex md:flex-col pl-4 md:mt-0 md:mx-auto">
+        <div className="relative flex md:flex-col pl-4 md:pl-0 md:mt-0 md:mx-auto">
           <div className="absolute top-0 translate-y-[-200%] md:translate-y-[0%] text-xl md:relative md:my-10">
             Next skill i want to learn
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-5 md:justify-between">
             <div>
               <svg
                 width="60"
@@ -3632,9 +3616,6 @@ const AboutMe = () => {
                     <stop offset="0.598" stop-color="#52A044" />
                     <stop offset="0.862" stop-color="#3F873F" />
                   </linearGradient>
-                  <clipPath id="clip0_2057_839">
-                    <rect width="60" height="60" fill="white" />
-                  </clipPath>
                 </defs>
               </svg>
             </div>
@@ -3682,11 +3663,6 @@ const AboutMe = () => {
                     fill="black"
                   />
                 </g>
-                <defs>
-                  <clipPath id="clip0_2057_851">
-                    <rect width="60" height="60" fill="white" />
-                  </clipPath>
-                </defs>
               </svg>
             </div>
           </div>
