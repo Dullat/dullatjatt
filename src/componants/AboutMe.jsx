@@ -4,7 +4,7 @@ import Grid from "./Grid"
 const AboutMe = () => {
   return (
     <div className="relative ">
-      {/* <Grid black={true}></Grid> */}
+      <Grid black={true}></Grid>
       <div className="my-20 grid grid-cols-2 lg:grid-cols-1">
         <div className="pr-10 md:px-4 xsm:px-2">
           <div className="bg-[#444444] p-8 text-white md:text-center">

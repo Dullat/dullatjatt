@@ -4,7 +4,10 @@
 
 @layer utilities {
   .skill-box {
-    @apply p-4 shadow-lg w-fit h-fit m-auto text-center flex flex-col gap-1 text-sm bg-[#CACACA] hover:scale-105 transition-all cursor-pointer;
+    @apply p-4 shadow-lg w-fit h-fit m-auto text-center flex flex-col gap-1 text-sm md:text-xs bg-[#CACACA] hover:scale-105 transition-all cursor-pointer;
+  }
+  .project-box {
+    @apply grid grid-cols-[1fr_1fr] gap-6 md:grid-cols-1;
   }
 }
 
