@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.playing-status {
+  background: rgba(175, 175, 175, 0.534);
+}
+
 @layer utilities {
   .skill-box {
     @apply p-4 shadow-lg w-fit h-fit m-auto text-center flex flex-col gap-1 text-sm md:text-xs bg-[#CACACA] hover:scale-105 transition-all cursor-pointer;
   }
   .project-box {
     @apply grid grid-cols-[1fr_1fr] gap-6 md:grid-cols-1;
+  }
+  .play-btn {
+    @apply bg-white border-[1px] border-black rounded-full px-2 absolute bottom-[-2rem] left-[50%] translate-x-[-50%];
   }
 }
 

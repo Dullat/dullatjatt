@@ -2,11 +2,20 @@ import React, { useRef, useState } from "react"
 import { projects } from "../constant"
 
 const Projects = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [playing, setPlaying] = useState({})
   const videoRef = useRef({})
+  const playingStatus = useRef({})
 
   const handleVidPlay = (i, play) => {
-    play ? videoRef.current[i].play() : videoRef.current[i].pause()
+    if (play === true) {
+      videoRef.current[i].play()
+      playingStatus.current[i].textContent = `Playing...`
+      setPlaying({ ...playing, i: true })
+    } else {
+      videoRef.current[i].pause()
+      playingStatus.current[i].textContent = ``
+      setPlaying({ ...playing, i: false })
+    }
   }
   return (
     <div className="grid grid-cols-1 *:border-b-[1px] *:py-10">
@@ -47,18 +56,31 @@ const Projects = () => {
               </button>
             </div>
           </div>
-          <div>
+          <div className="relative">
             <video
               ref={(el) => (videoRef.current[i] = el)}
               autoPlay={false}
-              playsInline={true}
+              // playsInline={true}
               muted
               width={600}
               loop={true}
+              preload={true}
               className="w-full"
             >
               <source src={project.vid} type="video/mp4" />
             </video>
+            <div
+              ref={(el) => (playingStatus.current[i] = el)}
+              className="absolute top-4 left-4 playing-status px-2 rounded-full text-white"
+            ></div>
+            <button
+              onClick={() =>
+                handleVidPlay(i, videoRef.current[i].paused ? true : false)
+              }
+              className="play-btn"
+            >
+              {playing.i ? "PAUSE" : "PLAY"}
+            </button>
           </div>
         </div>
       ))}
