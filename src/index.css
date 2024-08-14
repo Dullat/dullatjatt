@@ -14,7 +14,7 @@
     @apply grid grid-cols-[1fr_1fr] gap-6 md:grid-cols-1;
   }
   .play-btn {
-    @apply bg-white border-[1px] border-black rounded-full px-2 absolute bottom-[-2rem] left-[50%] translate-x-[-50%];
+    @apply bg-white border-[1px] border-black rounded-full px-2 absolute bottom-[-2rem] left-[50%] translate-x-[-50%] z-40;
   }
 }
 

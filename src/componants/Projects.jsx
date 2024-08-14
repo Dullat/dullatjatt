@@ -4,18 +4,23 @@ import { projects } from "../constant"
 const Projects = () => {
   const [playing, setPlaying] = useState({})
   const videoRef = useRef({})
-  const playingStatus = useRef({})
+  const playingStatus = useRef([])
 
   const handleVidPlay = (i, play) => {
     if (play === true) {
       videoRef.current[i].play()
       playingStatus.current[i].textContent = `Playing...`
-      setPlaying({ ...playing, i: true })
+      setPlaying((prev) => ({ ...prev, [i]: true }))
     } else {
       videoRef.current[i].pause()
       playingStatus.current[i].textContent = ``
-      setPlaying({ ...playing, i: false })
+      setPlaying((prev) => ({ ...prev, [i]: false }))
     }
+  }
+
+  const handleButtonClick = (e, i) => {
+    e.stopPropagation()
+    handleVidPlay(i, !playing[i])
   }
   return (
     <div className="grid grid-cols-1 *:border-b-[1px] *:py-10">
@@ -74,12 +79,10 @@ const Projects = () => {
               className="absolute top-4 left-4 playing-status px-2 rounded-full text-white"
             ></div>
             <button
-              onClick={() =>
-                handleVidPlay(i, videoRef.current[i].paused ? true : false)
-              }
+              onClick={(e) => handleButtonClick(e, i)}
               className="play-btn"
             >
-              {playing.i ? "PAUSE" : "PLAY"}
+              {playing[i] ? "PAUSE" : "PLAY"}
             </button>
           </div>
         </div>
