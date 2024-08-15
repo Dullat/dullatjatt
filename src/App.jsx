@@ -3,6 +3,7 @@ import HomeSection from "./componants/HomeSection"
 import NavBar from "./componants/NavBar"
 import AboutMe from "./componants/AboutMe"
 import Projects from "./componants/Projects"
+import Social from "./componants/Social"
 const App = () => {
   return (
     <div className="">
@@ -15,6 +16,9 @@ const App = () => {
       </div>
       <div className="bg-white px-[10%] flex flex-col xl:px-6 xsm:px-2">
         <Projects></Projects>
+      </div>
+      <div className="bg-black px-[10%] flex flex-col xl:px-6 xsm:px-2">
+        <Social></Social>
       </div>
     </div>
   )
