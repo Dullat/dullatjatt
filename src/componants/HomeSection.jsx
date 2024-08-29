@@ -1,10 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import womanBg from "../assets/images/woman.jpg"
 import Grid from "./Grid"
+import ScrollToPlugin from "gsap/ScrollToPlugin"
+gsap.registerPlugin(ScrollToPlugin)
 
 const HomeSection = () => {
+  const scrollToSectionById = () => {
+    gsap.to(window, { duration: 1, scrollTo: "#projects", ease: "expo.in" })
+  }
   useGSAP(() => {
     gsap.fromTo(
       "#heading",
@@ -83,6 +88,7 @@ const HomeSection = () => {
         <button
           id="btn"
           className="row-start-4 bg-gray-300 rounded-full border-2 border-black px-6 z-10 py-2 h-fit self-center m-auto text-black font-thin w-32"
+          onClick={() => scrollToSectionById()}
         >
           Projects
         </button>

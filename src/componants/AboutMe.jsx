@@ -1,7 +1,26 @@
 import React from "react"
 import Grid from "./Grid"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 
 const AboutMe = () => {
+  useGSAP(() => {
+    gsap.fromTo(
+      ".skill-box",
+      {
+        start: "bottom bottom",
+        y: 50,
+      },
+      {
+        start: "bottom bottom",
+        delay: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "expo.out",
+      }
+    )
+  }, [])
   return (
     <div className="relative ">
       <Grid black={true}></Grid>

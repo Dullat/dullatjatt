@@ -23,7 +23,7 @@ const Projects = () => {
     handleVidPlay(i, !playing[i])
   }
   return (
-    <div className="grid grid-cols-1 *:border-b-[1px] *:py-10">
+    <div className="grid grid-cols-1 *:border-b-[1px] *:py-10" id="projects">
       <div className="text-center">
         <p className="text-3xl mb-6">Projects</p>
         <p>
