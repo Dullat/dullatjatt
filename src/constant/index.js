@@ -1,6 +1,10 @@
 import iphoneVid from "../assets/vids/iphone.webm"
 import marathonVid from "../assets/vids/marathon.webm"
 import eeactAppVid from "../assets/vids/ReactApp.webm"
+import arrow from "../assets/svg/arrow-right-circle.svg"
+import insta from "../assets/svg/instagram.svg"
+import github from "../assets/svg/github.svg"
+import linkedin from "../assets/svg/linkedin.svg"
 
 export const projects = [
   {
@@ -34,3 +38,26 @@ export const projects = [
     },
   },
 ]
+
+export const socialLinks = [
+  {
+    user: "dullat101",
+    altText: "instagram",
+    svg: insta,
+    link: "https://instagram.com/dullat101",
+  },
+  {
+    user: "dullat",
+    altText: "github",
+    svg: github,
+    link: "https://github.com/dullat",
+  },
+  {
+    user: "dullatjatt",
+    altText: "linkedin",
+    svg: linkedin,
+    link: "https://instagram.com/dullat101",
+  },
+]
+
+export const goBtn = arrow
