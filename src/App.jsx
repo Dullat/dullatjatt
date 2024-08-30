@@ -4,6 +4,7 @@ import NavBar from "./componants/NavBar"
 import AboutMe from "./componants/AboutMe"
 import Projects from "./componants/Projects"
 import Social from "./componants/Social"
+import Footer from "./componants/Footer"
 const App = () => {
   return (
     <div className="">
@@ -19,6 +20,9 @@ const App = () => {
       </div>
       <div className="bg-black px-[10%] flex flex-col xl:px-0">
         <Social></Social>
+      </div>
+      <div className="bg-black px-[10%] flex flex-col xl:px-0">
+        <Footer />
       </div>
     </div>
   )

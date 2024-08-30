@@ -22,7 +22,7 @@ const AboutMe = () => {
     )
   }, [])
   return (
-    <div className="relative ">
+    <div className="relative " id="about">
       <Grid black={true}></Grid>
       <div className="my-20 grid grid-cols-2 lg:grid-cols-1">
         <div className="pr-10 md:px-4 xsm:px-2">

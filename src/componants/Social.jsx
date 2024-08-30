@@ -14,7 +14,10 @@ const Social = () => {
     }
   }
   return (
-    <section className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606]">
+    <section
+      className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606]"
+      id="social"
+    >
       <div className="xl:order-2">
         <img
           src={socialImg}
