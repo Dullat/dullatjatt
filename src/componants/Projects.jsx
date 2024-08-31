@@ -52,12 +52,14 @@ const Projects = () => {
             </div>
             <div className="grid grid-cols-2 gap-8 mt-auto mb-4 font-light text-lg md:my-4">
               <button className="px-2 border-[1px] rounded-full max-w-40">
-                <a href="">
+                <a href={project.links.live}>
                   <span>Visit Live</span>
                 </a>
               </button>
               <button className="px-2 border-[1px] rounded-full max-w-40">
-                <span>Visit Code</span>
+                <a href={project.links.code}>
+                  <span>Visit Code</span>
+                </a>
               </button>
             </div>
           </div>
@@ -80,7 +82,9 @@ const Projects = () => {
             ></div>
             <button
               onClick={(e) => handleButtonClick(e, i)}
-              className="play-btn"
+              className={`play-btn ${
+                playing[i] ? "translate-y-[2rem]" : "translate-y-[50%]"
+              }`}
             >
               {playing[i] ? "PAUSE" : "PLAY"}
             </button>

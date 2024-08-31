@@ -9,32 +9,32 @@ import linkedin from "../assets/svg/linkedin.svg"
 export const projects = [
   {
     name: "iPhone",
-    des: "comonants from apple's website like hero and implementation of complex video carosuel using gsap",
-    tech: ["React", "GSAP"],
+    des: "Comonants from apple's website like hero and implementation of complex video carosuel using gsap. Objective was to learn GSAP",
+    tech: ["Frontend", "React", "GSAP", "Router"],
     vid: iphoneVid,
     links: {
-      live: "dont have link",
-      code: "i dont know",
+      live: "https://dullat.github.io/apple-store-componants/",
+      code: "https://github.com/Dullat/apple-store-componants",
     },
   },
   {
     name: "Store",
-    des: "comonants from apple's website like hero and implementation of complex video carosuel using gsap",
-    tech: ["React", "GSAP"],
+    des: "It is a job listing webApp allow Developers and Companies to show, browse, add, edit and delete jobs",
+    tech: ["Frontend", "React", "json-server", "Router"],
     vid: eeactAppVid,
     links: {
-      live: "dont have link",
-      code: "i dont know",
+      live: "https://dullat.github.io/",
+      code: "https://github.com/Dullat/React-jobs",
     },
   },
   {
     name: "Marathon the Game",
-    des: "comonants from apple's website like hero and implementation of complex video carosuel using gsap",
-    tech: ["React"],
+    des: "A game store using complex layout",
+    tech: ["Frontend", "React", "Router"],
     vid: marathonVid,
     links: {
-      live: "dont have link",
-      code: "i dont know",
+      live: "https://dullat.github.io/marathon/",
+      code: "https://github.com/Dullat/marathon",
     },
   },
 ]
