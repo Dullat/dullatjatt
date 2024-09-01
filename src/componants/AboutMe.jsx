@@ -1,8 +1,8 @@
 import React from "react"
-import Grid from "./Grid"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/src/ScrollTrigger"
+import AboutGrid from "./AboutGrid"
 gsap.registerPlugin(ScrollTrigger)
 
 const AboutMe = () => {
@@ -29,7 +29,8 @@ const AboutMe = () => {
   }, [])
   return (
     <div className="relative " id="about">
-      <Grid black={true}></Grid>
+      {/* <Grid2 black={true}></Grid2> */}
+      <AboutGrid></AboutGrid>
       <div className="my-20 grid grid-cols-2 lg:grid-cols-1">
         <div className="pr-10 md:px-4 xsm:px-2">
           <div className="bg-[#444444] p-8 text-white md:text-center">
