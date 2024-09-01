@@ -2,22 +2,28 @@ import React from "react"
 import Grid from "./Grid"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import ScrollTrigger from "gsap/src/ScrollTrigger"
+gsap.registerPlugin(ScrollTrigger)
 
 const AboutMe = () => {
   useGSAP(() => {
     gsap.fromTo(
       ".skill-box",
       {
-        start: "bottom bottom",
         y: 50,
       },
       {
-        start: "bottom bottom",
-        delay: 1,
+        scrollTrigger: {
+          trigger: ".skill-box",
+          start: "top 90%",
+          end: "bottom 50%",
+          // markers: true,
+          scrub: true,
+        },
         y: 0,
         duration: 0.7,
         stagger: 0.1,
-        ease: "expo.out",
+        ease: "back.inOut",
       }
     )
   }, [])
