@@ -8,7 +8,7 @@ import Footer from "./componants/Footer"
 const App = () => {
   return (
     <div className="">
-      <div className="bg-black px-[10%] h-dvh  flex flex-col xl:px-6 xsm:px-2">
+      <div className="bg-black px-[10%] h-lvh  flex flex-col xl:px-6 xsm:px-2">
         <NavBar></NavBar>
         <HomeSection></HomeSection>
       </div>
