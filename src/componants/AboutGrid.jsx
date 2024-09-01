@@ -13,11 +13,11 @@ const AboutGrid = () => {
       },
       {
         scrollTrigger: {
-          trigger: ".Abox",
+          trigger: "#about",
           start: "top, 90%",
-          end: "top -10%",
-          scrub: 2,
-          markers: true,
+          end: "top -5%",
+          scrub: 3,
+          //   markers: true,
         },
         height: "100%",
         // ease: "steps(50)",
