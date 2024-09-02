@@ -45,13 +45,13 @@ const Social = () => {
             </a>
           </div>
         ))}
-        <div className="bg-slate-900 rounded-md w-full h-[60px] flex items-center p-4 relative">
+        <div className="bg-slate-900 rounded-md w-full h-[60px] flex items-center p-4 relative overflow-hidden">
           <textarea
             name="email"
             id=""
             rows="1"
             disabled="true"
-            className="bg-transparent w-full resize-none outline-none border-none"
+            className="bg-transparent w-full resize-none outline-none border-none cursor-text"
           >
             jashandullat8@gmail.com
           </textarea>

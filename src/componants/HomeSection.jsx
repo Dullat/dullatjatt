@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollToPlugin)
 
 const HomeSection = () => {
   const scrollToSectionById = () => {
-    gsap.to(window, { duration: 1, scrollTo: "#projects", ease: "expo.in" })
+    gsap.to(window, { duration: 1, scrollTo: "#projects", ease: "power2.out" })
   }
   useGSAP(() => {
     gsap.fromTo(

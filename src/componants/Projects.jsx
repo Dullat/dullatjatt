@@ -51,7 +51,13 @@ const Projects = () => {
               ))}
             </div>
             <div className="grid grid-cols-2 gap-8 mt-auto mb-4 font-light text-lg md:my-4">
-              <button className="px-2 border-[1px] rounded-full max-w-40">
+              <button
+                className={`px-2 border-[1px] rounded-full max-w-40 ${
+                  project.links.liveAvalable === false
+                    ? "pointer-events-none cursor-default opacity-50"
+                    : ""
+                }`}
+              >
                 <a href={project.links.live}>
                   <span>Visit Live</span>
                 </a>

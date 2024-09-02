@@ -25,6 +25,7 @@ export const projects = [
     links: {
       live: "https://dullat.github.io/",
       code: "https://github.com/Dullat/React-jobs",
+      liveAvalable: false,
     },
   },
   {
@@ -56,7 +57,7 @@ export const socialLinks = [
     user: "dullatjatt",
     altText: "linkedin",
     svg: linkedin,
-    link: "https://instagram.com/dullat101",
+    link: "https://www.linkedin.com/in/jashan-dullat-462b3b304/",
   },
 ]
 
