@@ -2,6 +2,9 @@ import React, { useRef } from "react"
 import socialImg from "../assets/images/social.jpg"
 import { goBtn } from "../constant"
 import { socialLinks } from "../constant"
+import { Canvas } from "@react-three/fiber"
+import { David } from "./David"
+import { Environment, OrbitControls } from "@react-three/drei"
 
 const Social = () => {
   const copyBtn = useRef()
@@ -19,11 +22,16 @@ const Social = () => {
       id="social"
     >
       <div className="xl:order-2">
-        <img
+        <Canvas className="w-full xl:h-60" camera={{ position: [0,0,.4], fov: 70 }}>
+          <Environment preset="city" backgroundIntensity={0} environmentIntensity={.7} />
+          <David />
+          <OrbitControls enableZoom={false} enablePan={false}></OrbitControls>
+        </Canvas>
+        {/* <img
           src={socialImg}
           alt=""
           className="w-full xl:h-60 object-cover object-center"
-        />
+        /> */}
       </div>
       <div className="flex flex-col gap-8 justify-center p-12 xsm:px-4 w-full max-w-[35rem] m-auto">
         <div className="flex flex-col items-center gap-4 pb-8 text-center">
