@@ -4,6 +4,7 @@ import { goBtn } from "../constant"
 import { socialLinks } from "../constant"
 import { Canvas } from "@react-three/fiber"
 import { David } from "./David"
+import {BMW} from "./BMW"
 import { Environment, OrbitControls } from "@react-three/drei"
 
 const Social = () => {
@@ -21,11 +22,12 @@ const Social = () => {
       className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606]"
       id="social"
     >
-      <div className="xl:order-2">
-        <Canvas className="w-full xl:h-60" camera={{ position: [0,0,.4], fov: 70 }}>
+      <div className="xl:order-2 cursor-move">
+        <Canvas className="w-full h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 70 }}>
           <Environment preset="city" backgroundIntensity={0} environmentIntensity={.7} />
-          <David />
-          <OrbitControls enableZoom={false} enablePan={false}></OrbitControls>
+          {/* <David /> */}
+          <BMW />
+          <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
         </Canvas>
         {/* <img
           src={socialImg}
