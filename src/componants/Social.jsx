@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import socialImg from "../assets/images/social.jpg"
 import { goBtn } from "../constant"
 import { socialLinks } from "../constant"
@@ -8,6 +8,7 @@ import {BMW} from "./BMW"
 import { Environment, OrbitControls } from "@react-three/drei"
 
 const Social = () => {
+  const [rerender, setrerender] = useState()
   const copyBtn = useRef()
   const handleCopy = async () => {
     try {
@@ -17,13 +18,27 @@ const Social = () => {
       alert("Failed to copy text.")
     }
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if(1300<window.innerWidth && 550<window.innerWidth){
+        setrerender(2)
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [rerender]);
   return (
     <section
-      className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606]"
+      className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606] w-full"
       id="social"
     >
-      <div className="xl:order-2 cursor-move">
-        <Canvas className="w-full h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 70 }}>
+      <div className="xl:order-2 cursor-move w-full">
+        <Canvas className="h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 70 }}>
           <Environment preset="city" backgroundIntensity={0} environmentIntensity={.7} />
           {/* <David /> */}
           <BMW />

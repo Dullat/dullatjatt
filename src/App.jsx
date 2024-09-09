@@ -18,7 +18,7 @@ const App = () => {
       <div className="bg-white px-[10%] flex flex-col xl:px-6 xsm:px-2">
         <Projects></Projects>
       </div>
-      <div className="bg-black px-[10%] flex flex-col xl:px-0">
+      <div className="bg-black px-[10%] flex flex-col xl:px-0 w-dvw">
         <Social></Social>
       </div>
       <div className="bg-black px-[10%] flex flex-col xl:px-0">
