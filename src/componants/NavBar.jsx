@@ -27,17 +27,17 @@ const NavBar = () => {
     <div className="relative grid grid-cols-4 md:grid-cols-3 *:h-10 *:bg-black text-white font-light text-xl xl:text-sm">
       <div className="flex justify-center items-center translate-x-[50%] md:translate-x-0">
         <span className="nav-el">
-          <p onClick={() => scrollTo("#projects")}>Projects</p>
+          <p className="cursor-pointer" onClick={() => scrollTo("#projects")}>Projects</p>
         </span>
       </div>
       <div className="flex justify-center items-center translate-x-[50%] md:translate-x-0">
         <span className="nav-el">
-          <p onClick={() => scrollTo("#about")}>About</p>
+          <p className="cursor-pointer" onClick={() => scrollTo("#about")}>About</p>
         </span>
       </div>
       <div className="flex justify-center items-center translate-x-[50%] md:translate-x-0">
         <span className="nav-el">
-          <p onClick={() => scrollTo("#social")}>Contact</p>
+          <p className="cursor-pointer" onClick={() => scrollTo("#social")}>Contact</p>
         </span>
       </div>
       <div className="xl:hidden"></div>

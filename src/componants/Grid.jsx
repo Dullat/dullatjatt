@@ -12,7 +12,7 @@ const Grid = ({ black }) => {
       },
       {
         height: "100%",
-        duration: 0.7,
+        duration: 1,
       }
     )
   }, [])
