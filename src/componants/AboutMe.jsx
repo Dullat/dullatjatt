@@ -22,7 +22,7 @@ const AboutMe = () => {
         },
         y: 0,
         duration: 0.7,
-        stagger: 0.1,
+        stagger: 0.5,
         ease: "back.inOut",
       }
     )
