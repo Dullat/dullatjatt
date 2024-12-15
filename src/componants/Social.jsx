@@ -41,10 +41,10 @@ const Social = () => {
         <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 flex cursor-default">
           <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
         </div>
-        <Canvas className="h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 10 }}>
+        <Canvas className="h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 70 }}>
           <Environment preset="city" backgroundIntensity={0} environmentIntensity={.7} />
-          <David />
-          {/* <BMW /> */}
+          {/* <David /> */}
+          <BMW />
           <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
         </Canvas>
         {/* <img
