@@ -3,13 +3,14 @@ import socialImg from "../assets/images/social.jpg"
 import { goBtn } from "../constant"
 import { socialLinks } from "../constant"
 import { Canvas } from "@react-three/fiber"
-import { David } from "./David"
 import { Environment, OrbitControls } from "@react-three/drei"
 import { InView } from "react-intersection-observer"
+import Loading from "./Loading"
 const BMW = lazy(() => import('./BMW'))
+const David = lazy(() => import('./David'))
 
 const Social = () => {
-  const [rerender, setrerender] = useState()
+  const [rerender, setrerender] = useState(0)
   const copyBtn = useRef()
   const handleCopy = async () => {
     try {
@@ -39,7 +40,7 @@ const Social = () => {
       id="social"
     >
       <div className="xl:order-2 cursor-move w-full relative">
-        <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 flex cursor-default">
+        <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 cursor-default hidden sm:flex">
           <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
         </div>
         {/* Wrap Canvas inside InView */}
@@ -48,10 +49,11 @@ const Social = () => {
             <div className="h-full" ref={ref}>
               {/* Render Canvas only when InView is true */}
               {inView && (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: 70 }}>
+                <Suspense fallback={<Loading/>}>
+                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: 10 }}>
                     <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
-                    <BMW />
+                    {/* <BMW /> */}
+                    <David/>
                     <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
                   </Canvas>
                 </Suspense>

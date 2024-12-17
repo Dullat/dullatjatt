@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { MeshStandardMaterial } from 'three'
 import { useFrame } from "@react-three/fiber"
 
-export function David(props) {
+const David = (props) => {
   const { nodes, materials } = useGLTF('/dullatjatt/david.glb')
   const redMaterial = new MeshStandardMaterial({ color: 'white', wireframe: true })
   const ref = useRef()
@@ -24,5 +24,7 @@ export function David(props) {
     </group>
   )
 }
+
+export default David
 
 useGLTF.preload('/dullatjatt/david.glb')
