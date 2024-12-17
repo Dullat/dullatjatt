@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
-export function BMW(props) {
+const BMW = (props) => {
     const ref = useRef()
   const { nodes, materials } = useGLTF('/dullatjatt/bmw.glb')
   useFrame((state, delta) => {
@@ -330,5 +330,7 @@ export function BMW(props) {
     </group>
   )
 }
+
+export default BMW
 
 useGLTF.preload('/dullatjatt/bmw.glb')

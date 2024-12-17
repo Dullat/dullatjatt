@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { Suspense, useEffect, useRef, useState, lazy } from "react"
 import socialImg from "../assets/images/social.jpg"
 import { goBtn } from "../constant"
 import { socialLinks } from "../constant"
 import { Canvas } from "@react-three/fiber"
 import { David } from "./David"
-import {BMW} from "./BMW"
 import { Environment, OrbitControls } from "@react-three/drei"
+import { InView } from "react-intersection-observer"
+const BMW = lazy(() => import('./BMW'))
 
 const Social = () => {
   const [rerender, setrerender] = useState()
@@ -21,7 +22,7 @@ const Social = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if(1300<window.innerWidth && 550<window.innerWidth){
+      if (1300 < window.innerWidth && 550 < window.innerWidth) {
         setrerender(2)
       }
     };
@@ -41,12 +42,23 @@ const Social = () => {
         <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 flex cursor-default">
           <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
         </div>
-        <Canvas className="h-full min-h-[500px]" camera={{ position: [0,1,3], fov: 70 }}>
-          <Environment preset="city" backgroundIntensity={0} environmentIntensity={.7} />
-          {/* <David /> */}
-          <BMW />
-          <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
-        </Canvas>
+        {/* Wrap Canvas inside InView */}
+        <InView triggerOnce={true}>
+          {({ inView, ref }) => (
+            <div className="h-full" ref={ref}>
+              {/* Render Canvas only when InView is true */}
+              {inView && (
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: 70 }}>
+                    <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
+                    <BMW />
+                    <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
+                  </Canvas>
+                </Suspense>
+              )}
+            </div>
+          )}
+        </InView>
         {/* <img
           src={socialImg}
           alt=""
