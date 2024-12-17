@@ -6,12 +6,15 @@ import { Canvas } from "@react-three/fiber"
 import { Environment, OrbitControls } from "@react-three/drei"
 import { InView } from "react-intersection-observer"
 import Loading from "./Loading"
+import { isMobile } from "react-device-detect"
 const BMW = lazy(() => import('./BMW'))
 const David = lazy(() => import('./David'))
 
 const Social = () => {
   const [rerender, setrerender] = useState(0)
   const copyBtn = useRef()
+  const isFov = isMobile ? 70 : 10
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText("jashandullat@gmail.com")
@@ -49,11 +52,10 @@ const Social = () => {
             <div className="h-full" ref={ref}>
               {/* Render Canvas only when InView is true */}
               {inView && (
-                <Suspense fallback={<Loading/>}>
-                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: 10 }}>
+                <Suspense fallback={<Loading />}>
+                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: isFov }}>
                     <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
-                    {/* <BMW /> */}
-                    <David/>
+                    {isMobile === true ? (<BMW />) : (<David />)}
                     <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
                   </Canvas>
                 </Suspense>
