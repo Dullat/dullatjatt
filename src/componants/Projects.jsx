@@ -23,7 +23,7 @@ const Projects = () => {
     handleVidPlay(i, !playing[i])
   }
   return (
-    <div className="grid grid-cols-1 *:border-b-[1px] *:py-10" id="projects">
+    <div className="grid grid-cols-1 *:border-b-[1px] *:py-10 relative" id="projects">
       <div className="text-center">
         <p className="text-3xl mb-6">Projects</p>
         <p>
@@ -52,7 +52,7 @@ const Projects = () => {
             </div>
             <div className="grid grid-cols-2 gap-8 mt-auto mb-4 font-light text-lg md:my-4">
               <button
-                className={`px-2 border-[1px] rounded-full max-w-40 ${
+                className={`px-2 border-[1px] relative z-30 rounded-full max-w-40 ${
                   project.links.liveAvalable === false
                     ? "pointer-events-none cursor-default opacity-50"
                     : ""

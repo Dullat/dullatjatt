@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/src/ScrollTrigger"
 import AboutGrid from "./AboutGrid"
+import { isMobile } from "react-device-detect"
 gsap.registerPlugin(ScrollTrigger)
 
 const AboutMe = () => {
@@ -16,7 +17,7 @@ const AboutMe = () => {
         scrollTrigger: {
           trigger: ".skill-box",
           start: "top 90%",
-          end: "bottom 50%",
+          end: isMobile? "bottom 30%": "bottom 50%",
           // markers: true,
           scrub: true,
         },

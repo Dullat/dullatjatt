@@ -43,31 +43,36 @@ const Social = () => {
       id="social"
     >
       <div className="xl:order-2 cursor-move w-full relative">
-        <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 cursor-default hidden sm:flex">
+        {/* <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 cursor-default hidden sm:flex">
           <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
-        </div>
-        {/* Wrap Canvas inside InView */}
-        <InView triggerOnce={true}>
-          {({ inView, ref }) => (
-            <div className="h-full" ref={ref}>
-              {/* Render Canvas only when InView is true */}
-              {inView && (
-                <Suspense fallback={<Loading />}>
-                  <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: isFov }}>
-                    <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
-                    {isMobile === true ? (<BMW />) : (<David />)}
-                    <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
-                  </Canvas>
-                </Suspense>
+        </div> */}
+        {
+          isMobile ? (
+            <img
+              src={socialImg}
+              alt=""
+              className="w-full xl:h-60 object-cover object-center"
+            />
+          ) : (
+            <InView triggerOnce={true}>
+              {({ inView, ref }) => (
+                <div className="h-full" ref={ref}>
+                  {/* Render Canvas only when InView is true */}
+                  {inView && (
+                    <Suspense fallback={<Loading />}>
+                      <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: isFov }}>
+                        <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
+                        <David/>
+                        {/* {isMobile === true ? (<BMW />) : (<David />)} */}
+                        <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
+                      </Canvas>
+                    </Suspense>
+                  )}
+                </div>
               )}
-            </div>
-          )}
-        </InView>
-        {/* <img
-          src={socialImg}
-          alt=""
-          className="w-full xl:h-60 object-cover object-center"
-        /> */}
+            </InView>
+          )
+        }
       </div>
       <div className="flex flex-col gap-8 justify-center p-12 xsm:px-4 w-full max-w-[35rem] m-auto">
         <div className="flex flex-col items-center gap-4 pb-8 text-center">
