@@ -24,25 +24,25 @@ const Social = () => {
     }
   }
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (1300 < window.innerWidth && 550 < window.innerWidth) {
-        setrerender(2)
-      }
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (1300 < window.innerWidth || 550 < window.innerWidth) {
+  //       setrerender(2)
+  //     }
+  //   };
 
-    window.addEventListener('resize', handleResize);
+  //   window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [rerender]);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, [rerender]);
   return (
     <section
-      className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606] w-full"
+      className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606] w-[100%]"
       id="social"
     >
-      <div className="xl:order-2 cursor-move w-full relative">
+      <div className="xl:order-2 cursor-move w-[100%] overflow-hidden relative">
         {/* <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 cursor-default hidden sm:flex">
           <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
         </div> */}
