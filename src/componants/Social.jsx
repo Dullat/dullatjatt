@@ -58,15 +58,21 @@ const Social = () => {
               {({ inView, ref }) => (
                 <div className="h-full" ref={ref}>
                   {/* Render Canvas only when InView is true */}
-                  {inView && (
+                  {inView ? (
                     <Suspense fallback={<Loading />}>
                       <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: isFov }}>
                         <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
-                        <David/>
+                        <David />
                         {/* {isMobile === true ? (<BMW />) : (<David />)} */}
                         <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
                       </Canvas>
                     </Suspense>
+                  ) : (
+                    <img
+                      src={socialImg}
+                      alt=""
+                      className="w-full xl:h-60 object-cover object-center"
+                    />
                   )}
                 </div>
               )}
