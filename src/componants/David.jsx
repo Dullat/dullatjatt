@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber"
 
 const David = (props) => {
   const { nodes, materials } = useGLTF('/dullatjatt/david.glb')
-  const redMaterial = new MeshStandardMaterial({ color: 'white', wireframe: true })
+  const redMaterial = new MeshStandardMaterial({ color: 'white', wireframe: false })
   const ref = useRef()
   useFrame((state, delta) => {
     ref.current.rotation.y -= delta * 0.1
