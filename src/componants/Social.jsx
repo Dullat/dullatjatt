@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState, lazy } from "react";
 import socialImg from "../assets/images/social.jpg";
 import { goBtn } from "../constant";
 import { socialLinks } from "../constant";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { InView } from "react-intersection-observer";
 import Loading from "./Loading";
@@ -10,6 +10,24 @@ import { isMobile } from "react-device-detect";
 
 const BMW = lazy(() => import('./BMW'));
 const David = lazy(() => import('./David'));
+
+const VisibilityController = ({ isVisible }) => {
+  const { gl } = useThree();
+  
+  useEffect(() => {
+    const canvas = gl.domElement;
+    
+    if (!isVisible) {
+      canvas.style.opacity = '0';
+      gl.setPixelRatio(0.1);
+    } else {
+      canvas.style.opacity = '1';
+      gl.setPixelRatio(window.devicePixelRatio);
+    }
+  }, [isVisible, gl]);
+  
+  return null;
+};
 
 const Social = () => {
   const [windowSize, setWindowSize] = useState({
@@ -20,10 +38,10 @@ const Social = () => {
   const isFov = isMobile ? 70 : 10;
   const emailAddress = "jashandullat8@gmail.com";
   
+  
   const [isInView, setIsInView] = useState(false);
-  const [modelInitialized, setModelInitialized] = useState(false);
-  const canvasContainerRef = useRef(null);
-
+  const [hasLoaded, setHasLoaded] = useState(false);
+  
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(emailAddress);
@@ -53,24 +71,12 @@ const Social = () => {
     };
   }, []);
 
+  // logging status
   useEffect(() => {
-    if (isInView && !isMobile) {
-      // first time, initialize the model
-      if (!modelInitialized) {
-        setModelInitialized(true);
-      }
-      
-      // when in view canvas is visible
-      if (canvasContainerRef.current) {
-        canvasContainerRef.current.style.display = 'block';
-      }
-    } else {
-      // when out of vieew, hide the canvas but dont unmount it
-      if (canvasContainerRef.current) {
-        canvasContainerRef.current.style.display = 'none';
-      }
+    if (isInView && !isMobile && !hasLoaded) {
+      setHasLoaded(true);
     }
-  }, [isInView, modelInitialized, isMobile]);
+  }, [isInView, isMobile, hasLoaded]);
 
   return (
     <section
@@ -87,53 +93,59 @@ const Social = () => {
         >
           {({ inView, ref }) => (
             <div className="h-full" ref={ref}>
-              {/* Always show the image when on mobile */}
-              {isMobile ? (
+              {/* show image when on mobile or when the model not loaded */}
+              {(isMobile || (!hasLoaded && !isInView)) ? (
                 <img
                   src={socialImg}
                   alt="Social"
                   className="w-full xl:h-60 object-cover object-center"
                 />
               ) : (
-                <>
-                  {/* The Canvas is always created after first view, but hidden when not in view */}
-                  {modelInitialized ? (
-                    <div 
-                      ref={canvasContainerRef} 
-                      style={{ display: isInView ? 'block' : 'none' }}
-                      className="h-full"
+                <div className="h-full min-h-[500px]">
+                  <Suspense fallback={<Loading />}>
+                    <Canvas 
+                      className="h-full" 
+                      camera={{ position: [0, 1, 3], fov: isFov }}
+                      frameloop="always"
+                      style={{ 
+                        position: "absolute", 
+                        top: 0, 
+                        left: 0, 
+                        width: "100%", 
+                        height: "100%",
+                        willChange: "opacity",
+                        transition: "opacity 0.2s ease-in-out" 
+                      }}
                     >
-                      <Suspense fallback={<Loading />}>
-                        <Canvas 
-                          className="h-full min-h-[500px]" 
-                          camera={{ position: [0, 1, 3], fov: isFov }}
-                        >
-                          <Environment 
-                            preset="city" 
-                            backgroundIntensity={0} 
-                            environmentIntensity={0.7} 
-                          />
-                          <David />
-                          <OrbitControls 
-                            enableZoom={true} 
-                            enablePan={false} 
-                            maxPolarAngle={Math.PI / 2} 
-                            maxDistance={5} 
-                            minDistance={3} 
-                            rotateSpeed={0.5}
-                          />
-                        </Canvas>
-                      </Suspense>
-                    </div>
-                  ) : (
-                    // Show the image until the first view initializes the 3D model
+                      
+                      <VisibilityController isVisible={isInView} />
+                      
+                      <Environment 
+                        preset="city" 
+                        backgroundIntensity={0} 
+                        environmentIntensity={0.7} 
+                      />
+                      <David />
+                      <OrbitControls 
+                        enableZoom={true} 
+                        enablePan={false} 
+                        maxPolarAngle={Math.PI / 2} 
+                        maxDistance={5} 
+                        minDistance={3} 
+                        rotateSpeed={0.5}
+                      />
+                    </Canvas>
+                  </Suspense>
+                  
+                  
+                  {/* {!isInView && (
                     <img
                       src={socialImg}
                       alt="Social"
-                      className="w-full xl:h-60 object-cover object-center"
+                      className="w-full h-full object-cover object-center absolute top-0 left-0 z-10"
                     />
-                  )}
-                </>
+                  )} */}
+                </div>
               )}
             </div>
           )}
