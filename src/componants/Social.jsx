@@ -1,97 +1,156 @@
-import React, { Suspense, useEffect, useRef, useState, lazy } from "react"
-import socialImg from "../assets/images/social.jpg"
-import { goBtn } from "../constant"
-import { socialLinks } from "../constant"
-import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls } from "@react-three/drei"
-import { InView } from "react-intersection-observer"
-import Loading from "./Loading"
-import { isMobile } from "react-device-detect"
-const BMW = lazy(() => import('./BMW'))
-const David = lazy(() => import('./David'))
+import React, { Suspense, useEffect, useRef, useState, lazy } from "react";
+import socialImg from "../assets/images/social.jpg";
+import { goBtn } from "../constant";
+import { socialLinks } from "../constant";
+import { Canvas } from "@react-three/fiber";
+import { Environment, OrbitControls } from "@react-three/drei";
+import { InView } from "react-intersection-observer";
+import Loading from "./Loading";
+import { isMobile } from "react-device-detect";
+
+const BMW = lazy(() => import('./BMW'));
+const David = lazy(() => import('./David'));
 
 const Social = () => {
-  const [rerender, setrerender] = useState(0)
-  const copyBtn = useRef()
-  const isFov = isMobile ? 70 : 10
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0
+  });
+  const copyBtn = useRef();
+  const isFov = isMobile ? 70 : 10;
+  const emailAddress = "jashandullat8@gmail.com";
+  
+  const [isInView, setIsInView] = useState(false);
+  const [modelInitialized, setModelInitialized] = useState(false);
+  const canvasContainerRef = useRef(null);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText("jashandullat@gmail.com")
-      copyBtn.current.textContent = "Copied"
+      await navigator.clipboard.writeText(emailAddress);
+      copyBtn.current.textContent = "Copied";
+      
+      setTimeout(() => {
+        if (copyBtn.current) {
+          copyBtn.current.textContent = "Copy";
+        }
+      }, 2000);
     } catch (err) {
-      alert("Failed to copy text.")
+      alert("Failed to copy text.");
     }
-  }
+  };
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (1300 < window.innerWidth || 550 < window.innerWidth) {
-  //       setrerender(2)
-  //     }
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
 
-  //   window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, [rerender]);
+  useEffect(() => {
+    if (isInView && !isMobile) {
+      // first time, initialize the model
+      if (!modelInitialized) {
+        setModelInitialized(true);
+      }
+      
+      // when in view canvas is visible
+      if (canvasContainerRef.current) {
+        canvasContainerRef.current.style.display = 'block';
+      }
+    } else {
+      // when out of vieew, hide the canvas but dont unmount it
+      if (canvasContainerRef.current) {
+        canvasContainerRef.current.style.display = 'none';
+      }
+    }
+  }, [isInView, modelInitialized, isMobile]);
+
   return (
     <section
       className="grid grid-cols-[1fr_1fr] text-white xl:grid-cols-1 bg-[#060606] w-[100%]"
       id="social"
     >
       <div className="xl:order-2 cursor-move w-[100%] overflow-hidden relative">
-        {/* <div className="absolute w-4 h-72 left-8 bg-gray-900 rounded-md z-10 cursor-default hidden sm:flex">
-          <span className="mt-auto flex rotate-90 origin-top bg-slate-400 rounded-md px-1"> Scroller</span>
-        </div> */}
-        {
-          isMobile ? (
-            <img
-              src={socialImg}
-              alt=""
-              className="w-full xl:h-60 object-cover object-center"
-            />
-          ) : (
-            <InView triggerOnce={true}>
-              {({ inView, ref }) => (
-                <div className="h-full" ref={ref}>
-                  {/* Render Canvas only when InView is true */}
-                  {inView ? (
-                    <Suspense fallback={<Loading />}>
-                      <Canvas className="h-full min-h-[500px]" camera={{ position: [0, 1, 3], fov: isFov }}>
-                        <Environment preset="city" backgroundIntensity={0} environmentIntensity={0.7} />
-                        <David />
-                        {/* {isMobile === true ? (<BMW />) : (<David />)} */}
-                        <OrbitControls enableZoom={true} enablePan={false} maxPolarAngle={Math.PI / 2} maxDistance={5} minDistance={3} rotateSpeed={0.5}></OrbitControls>
-                      </Canvas>
-                    </Suspense>
+        <InView 
+          threshold={0.1}
+          onChange={(inView) => {
+            console.log("InView status changed:", inView);
+            setIsInView(inView);
+          }}
+        >
+          {({ inView, ref }) => (
+            <div className="h-full" ref={ref}>
+              {/* Always show the image when on mobile */}
+              {isMobile ? (
+                <img
+                  src={socialImg}
+                  alt="Social"
+                  className="w-full xl:h-60 object-cover object-center"
+                />
+              ) : (
+                <>
+                  {/* The Canvas is always created after first view, but hidden when not in view */}
+                  {modelInitialized ? (
+                    <div 
+                      ref={canvasContainerRef} 
+                      style={{ display: isInView ? 'block' : 'none' }}
+                      className="h-full"
+                    >
+                      <Suspense fallback={<Loading />}>
+                        <Canvas 
+                          className="h-full min-h-[500px]" 
+                          camera={{ position: [0, 1, 3], fov: isFov }}
+                        >
+                          <Environment 
+                            preset="city" 
+                            backgroundIntensity={0} 
+                            environmentIntensity={0.7} 
+                          />
+                          <David />
+                          <OrbitControls 
+                            enableZoom={true} 
+                            enablePan={false} 
+                            maxPolarAngle={Math.PI / 2} 
+                            maxDistance={5} 
+                            minDistance={3} 
+                            rotateSpeed={0.5}
+                          />
+                        </Canvas>
+                      </Suspense>
+                    </div>
                   ) : (
+                    // Show the image until the first view initializes the 3D model
                     <img
                       src={socialImg}
-                      alt=""
+                      alt="Social"
                       className="w-full xl:h-60 object-cover object-center"
                     />
                   )}
-                </div>
+                </>
               )}
-            </InView>
-          )
-        }
+            </div>
+          )}
+        </InView>
       </div>
       <div className="flex flex-col gap-8 justify-center p-12 xsm:px-4 w-full max-w-[35rem] m-auto">
         <div className="flex flex-col items-center gap-4 pb-8 text-center">
           <p className="text-3xl">Social/contact</p>
-          <p>i dont use social media much , but here are links</p>
+          <p>I don't use social media much, but here are links</p>
         </div>
         {socialLinks.map((el) => (
-          <div className="flex items-center w-full">
+          <div key={el.link} className="flex items-center w-full">
             <span>
               <img src={el.svg} alt={el.altText} />
             </span>
             <span className="ml-4">{el.user}</span>
-            <a href={el.link} target="_blank" className="ml-auto">
+            <a href={el.link} target="_blank" rel="noopener noreferrer" className="ml-auto">
               <img
                 src={goBtn}
                 alt="right arrow"
@@ -103,13 +162,12 @@ const Social = () => {
         <div className="bg-slate-900 rounded-md w-full h-[60px] flex items-center p-4 relative overflow-hidden">
           <textarea
             name="email"
-            id=""
+            id="email-field"
             rows="1"
-            disabled="true"
+            readOnly
+            value={emailAddress}
             className="bg-transparent w-full resize-none outline-none border-none cursor-text"
-          >
-            jashandullat8@gmail.com
-          </textarea>
+          />
           <button
             ref={copyBtn}
             className="opacity-60 bg-slate-700 rounded-sm px-2 text-sm absolute bottom-0 right-0 hover:opacity-100"
@@ -120,7 +178,7 @@ const Social = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Social
+export default Social;

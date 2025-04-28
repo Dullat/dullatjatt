@@ -45,7 +45,7 @@ const Projects = () => {
             <p className="opacity-60">{project.des}</p>
             <div>
               {project.tech.map((tech, i) => (
-                <span className="bg-slate-700 text-white text-sm px-2 rounded-full mr-2">
+                <span key={tech} className="bg-slate-700 text-white text-sm px-2 rounded-full mr-2">
                   {tech}
                 </span>
               ))}
